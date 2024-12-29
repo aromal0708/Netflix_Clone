@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .btn {
+    @apply flex items-center justify-center max-w-44 px-4 py-2 h-8 bg-opacity-60 bg-gray-400  text-white text-lg font-medium rounded-md shadow-sm;
+    @apply hover:bg-white hover:text-black hover:transition duration-300 ease-in-out;
+  }
+  .auth-input{
+    @apply h-12 w-[300px] rounded-md font-normal text-white text-base bg-opacity-60 bg-black p-5 border-none outline-none  ;
+    @apply placeholder:text-white placeholder:opacity-50 placeholder:font-normal placeholder:text-base;
+  }
+}
+
+body{
+  
+}
