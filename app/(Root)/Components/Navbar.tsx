@@ -1,3 +1,5 @@
+"use client";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
@@ -17,6 +19,7 @@ const Navbar = () => {
         md:h-10 lg:h-10 md:w-32 
         sm:h-7 sm:w-24 sm:text-sm 
         rounded-lg text-white lg:font-semibold p-1"
+          onClick={() => signOut()}
         >
           Sign Out
         </button>

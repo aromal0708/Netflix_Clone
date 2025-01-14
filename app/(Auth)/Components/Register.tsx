@@ -1,58 +1,108 @@
-import Link from 'next/link'
-import React from 'react'
+"use client";
+import Link from "next/link";
+import { useRouter} from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords donot match");
+      return;
+    }
+
+    if (!email || !name || !password) {
+      toast.error("All Feilds Required");
+      return;
+    }
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success(data.message);
+        setEmail("");
+        setName("");
+        setPassword("");
+        setConfirmPassword("");
+        router.push("/login");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
   return (
-    <div className="w-full flex items-center justify-center h-screen bg-cneter bg-cover scrollbar scrollbar-none bg-login-pattern">
+    <div className="w-full flex items-center justify-center h-screen bg-center bg-cover scrollbar scrollbar-none bg-login-pattern">
       <div className="w-[450px] h-[550px] flex rounded-lg bg-black bg-opacity-50 items-center  justify-center relative">
         <form
-          action="submit"
+          onSubmit={handleSubmit}
           className="flex w-[450px] top-3 flex-col gap-2.5 p-[40px] items-center justify-center "
         >
           <span className="font-medium text-[34px] text-start mb-5 text-white text-opacity-80">
             Login
           </span>
           <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             type="text"
-            placeholder="First Name"
+            placeholder="Enter Full Name"
             className="auth-input"
           />
+
           <input
-            type="text"
-            placeholder="Last Name"
-            className="auth-input"
-          />
-          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             type="text"
             placeholder="Enter Email"
             className="auth-input"
           />
           <input
-            type="text"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="password"
             placeholder="Enter Password"
             className="auth-input"
           />
           <input
-            type="text"
+            type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmPassword}
             placeholder="Confirm Password"
             className="auth-input"
           />
           <button className="h-12 w-[300px] rounded-lg font-medium text-white text-xl bg-primary-red">
-            Login
+            Signup
           </button>
           <span className=" font-normal text-white text-opacity-50 ">
             Already Have an Account?{" "}
-            <Link
-              className="text-base text-white font-semibold"
-              href="/register"
-            >
-            Login
+            <Link className="text-base text-white font-semibold" href="/login">
+              Login
             </Link>
           </span>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

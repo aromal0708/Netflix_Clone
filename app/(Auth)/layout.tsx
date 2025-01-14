@@ -1,6 +1,8 @@
 import React from "react";
 import "../globals.css";
 import Navbar from "./Components/Navbar";
+import { Toaster } from "react-hot-toast";
+import Provider from "../Providers";
 
 export const metadata = {
   title: "Authentication",
@@ -16,7 +18,10 @@ export default function AuthLayout({
         <header>
           <Navbar />
         </header>
-        <main>{children}</main>
+        <main>
+          <Provider>{children}</Provider>
+          <Toaster position="top-center" toastOptions={{ duration: 1500 }} />
+        </main>
       </body>
     </html>
   );

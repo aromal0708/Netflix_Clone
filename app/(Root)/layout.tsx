@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { Navbar } from "./Components";
+import { Toaster } from "react-hot-toast";
+import Provider from "../Providers";
 
 export const metadata: Metadata = {
   title: "Netflix Clone",
@@ -18,7 +20,8 @@ export default function RootLayout({
         <header>
           <Navbar />
         </header>
-        {children}
+        <Provider>{children}</Provider>
+        <Toaster position="top-center" toastOptions={{ duration: 1500 }} />
       </body>
     </html>
   );
