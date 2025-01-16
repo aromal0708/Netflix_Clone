@@ -1,8 +1,11 @@
-import { useAxios } from "@/hooks/useAxios";
+"use client";
 import { trending } from "@/utils/urls";
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 const Hero = () => {
+  const url = trending;
+  const [movie, setMovie] = useState<any[]>([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -15,34 +18,44 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    const url = trending;
-    const { response, error } = useAxios({ url: url, apiType: "image" });
-  });
-  //this is where is stop now......for now and the mapping is the next step and i need to map the movie images for the carousal
+    const fetchData = async () => {
+      const url = process.env.NEXT_PUBLIC_API_BASE_URL;
+      if (!url) {
+        return;
+      }
+      const response = await axios.get(url + trending);
+      setMovie(response.data?.results);
+    };
+    fetchData();
+  }, []);
+  //this is today's stop :(   i haven't given up i will figt for what i want i will complete this project by the end of this week
   return (
-    <Slider {...settings}>
-      {}
-      <div
-        className=" h-[280px] w-full flex flex-col justify-center bg-cover bg bg-center items-start text-white p-1 lg:h-[430px]"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1731902062648-260a1b5067a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D)",
-        }}
-      >
-        <h1 className="text-xl ml-4 lg:font-bold sm:font-extrabold text-black">
-          Movie Name
-        </h1>
-        <p className="text-black sm:text-[12px] sm:max-w-[250px] sm:font-extralight lg:font-normal lg:text-[16px] lg:mt-3 lg:max-w-[550px] ml-4 ">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus
-          tempora facilis impedit consequuntur provident adipisci a? Fuga optio
-          ad est. Reiciendis quasi in
-        </p>
-        <div className="flex flex-row mt-4 ml-4 gap-1">
-          <button className="btn">Play</button>
-          <button className="btn">Add to Watchlist</button>
-        </div>
-      </div>
-    </Slider>
+    <div className="w-full h-[300px]">
+      <Slider {...settings}>
+        {movie?.slice(0, 5).map((movie: any) => (
+          <div
+            key={movie.id}
+            className=" h-full w-full flex flex-col justify-center bg-cover bg bg-center items-start text-white p-1 lg:h-[430px]"
+            style={{
+              backgroundImage: `url(${url + movie.backdrop_path})`,
+            }}
+          >
+            <h1 className="text-xl ml-4 lg:font-bold sm:font-extrabold text-black">
+              {movie.title}
+            </h1>
+            <p className="text-black sm:text-[12px] sm:max-w-[250px] sm:font-extralight lg:font-normal lg:text-[16px] lg:mt-3 lg:max-w-[550px] ml-4 ">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus
+              tempora facilis impedit consequuntur provident adipisci a? Fuga
+              optio ad est. Reiciendis quasi in
+            </p>
+            <div className="flex flex-row mt-4 ml-4 gap-1">
+              <button className="btn">Play</button>
+              <button className="btn">Add to Watchlist</button>
+            </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
   );
 };
 
