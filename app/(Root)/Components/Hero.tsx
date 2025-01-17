@@ -30,31 +30,24 @@ const Hero = () => {
   }, []);
   //this is today's stop :(   i haven't given up i will figt for what i want i will complete this project by the end of this week
   return (
-    <div className="w-full h-[300px]">
-      <Slider {...settings}>
-        {movie?.slice(0, 5).map((movie: any) => (
-          <div
-            key={movie.id}
-            className=" h-full w-full flex flex-col justify-center bg-cover bg bg-center items-start text-white p-1 lg:h-[430px]"
-            style={{
-              backgroundImage: `url(${url + movie.backdrop_path})`,
-            }}
-          >
-            <h1 className="text-xl ml-4 lg:font-bold sm:font-extrabold text-black">
-              {movie.title}
-            </h1>
-            <p className="text-black sm:text-[12px] sm:max-w-[250px] sm:font-extralight lg:font-normal lg:text-[16px] lg:mt-3 lg:max-w-[550px] ml-4 ">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus
-              tempora facilis impedit consequuntur provident adipisci a? Fuga
-              optio ad est. Reiciendis quasi in
-            </p>
-            <div className="flex flex-row mt-4 ml-4 gap-1">
-              <button className="btn">Play</button>
-              <button className="btn">Add to Watchlist</button>
-            </div>
-          </div>
-        ))}
-      </Slider>
+    <div
+      className=" h-[300px] w-full flex flex-col justify-center bg-cover bg bg-center items-start text-white p-1 lg:h-[430px]"
+      style={{
+        backgroundImage: `url("https://images.goodreturns.in/img/2025/01/yeh-jawaani-hy-deewani6-1736071788.jpg")`,
+      }}
+    >
+      <h1 className="text-xl ml-4 lg:font-bold sm:font-extrabold text-black">
+        Ye Jawani Hai Diwani
+      </h1>
+      <p className="text-black sm:text-[12px] sm:max-w-[250px] sm:font-extralight lg:font-normal lg:text-[16px] lg:mt-3 lg:max-w-[550px] ml-4 ">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus tempora
+        facilis impedit consequuntur provident adipisci a? Fuga optio ad est.
+        Reiciendis quasi in
+      </p>
+      <div className="flex flex-row mt-4 ml-4 gap-1">
+        <button className="btn">Play</button>
+        <button className="btn">Add to Watchlist</button>
+      </div>
     </div>
   );
 };

@@ -1,19 +1,13 @@
 import React from "react";
-import { movieProps } from "../types/types";
 
-const Poster: React.FC<movieProps> = ({ id, genre, movies }) => {
+const Poster: React.FC = () => {
   return (
-    
-      <div className="p-2 w-full overflow-x-scroll overflow-y-hidden scrollbar scrollbar-none flex">
-        {movies.map((movie) => (
-          <img
-            key={movie.id}
-            src={`${movie.image}`}
-            alt={`${movie.name}`}
-            className="max-h-72 mx-2 contain-content"
-          />
-        ))}
-      </div>
+    <div className="p-2 w-full flex">
+      <img
+        src="https://images.mid-day.com/images/images/2023/may/bloddydaddmainposter_d.jpg"
+        className="h-64 w-48 mx-2 contain-content container"
+      />
+    </div>
   );
 };
 

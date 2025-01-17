@@ -17,7 +17,7 @@ export default function AuthLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="scrollbar-hide">
         <header>
           <Navbar />
         </header>
