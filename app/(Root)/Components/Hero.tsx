@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Hero = () => {
   const [movie, setMovie] = useState<any[]>([]);
   const settings = {
-    dots: true,
+    // dots: true,
     infinite: true,
     speed: 800,
     slidesToScroll: 1,
@@ -28,7 +28,6 @@ const Hero = () => {
       try {
         const response = await axios.get(`${url}${trending}`);
         setMovie(response.data.results);
-        console.log(response.data.results);
       } catch (error: any) {
         console.error(error.message);
       }
@@ -36,7 +35,7 @@ const Hero = () => {
     fetchData();
   }, []);
   return (
-    <Slider {...settings} className="w-full overflow-hidden">
+    <Slider {...settings} className="w-full overflow-hidden scrollbar-none">
       {movie.map((item: any) => (
         <div
           key={item.id}

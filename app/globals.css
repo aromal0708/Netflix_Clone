@@ -2,14 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body::-webkit-scrollbar {
-  display: none
+html{
+  scrollbar-width: none
 }
-
-body {
-  overflow-y: scroll;
-}
-
 
 @layer utilities {
   .btn {

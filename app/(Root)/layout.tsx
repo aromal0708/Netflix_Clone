@@ -17,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="scrollbar-hide">
-        <header>
-          <Navbar />
-        </header>
-        <Provider>{children}</Provider>
-        <Toaster position="top-center" toastOptions={{ duration: 1500 }} />
+        <div className="min-h-screen w-full scrollbar scrollbar-hide ">
+          <header>
+            <Navbar />
+          </header>
+          <Provider>{children}</Provider>
+          <Toaster position="top-center" toastOptions={{ duration: 1500 }} />
+        </div>
       </body>
     </html>
   );
