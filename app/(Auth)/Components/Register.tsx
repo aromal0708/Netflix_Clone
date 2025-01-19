@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Navbar from "./Navbar";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -11,15 +12,20 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
+
+  const { startLoading, stopLoading } = useLoading();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    startLoading();
     if (password !== confirmPassword) {
       toast.error("Passwords donot match");
+      stopLoading();
       return;
     }
 
     if (!email || !name || !password) {
       toast.error("All Feilds Required");
+      stopLoading();
       return;
     }
     try {
@@ -44,10 +50,12 @@ const Register = () => {
         setConfirmPassword("");
         router.push("/login");
       } else {
+        stopLoading();
         throw new Error(data.message);
       }
     } catch (error: any) {
       console.log(error);
+      stopLoading();
       toast.error(error.message);
     }
   };

@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useLoading } from "@/contexts/LoadingContext";
 
 //component
 const Hero = () => {
   const [movie, setMovie] = useState<any[]>([]);
+  const { stopLoading } = useLoading();
   const settings = {
     // dots: true,
     infinite: true,
@@ -28,6 +30,7 @@ const Hero = () => {
       try {
         const response = await axios.get(`${url}${trending}`);
         setMovie(response.data.results);
+        stopLoading();
       } catch (error: any) {
         console.error(error.message);
       }

@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Navbar from "./Navbar";
@@ -19,6 +19,7 @@ const Login = () => {
     try {
       if (!email || !password) {
         toast.error("All Feilds Required");
+        stopLoading();
         return;
       }
       const res: any = await signIn("credentials", {
@@ -30,13 +31,20 @@ const Login = () => {
         toast.success("Log In Successful");
       } else {
         toast.error(res.error);
+        stopLoading();
         return;
       }
       router.push("/");
     } catch (error: any) {
       toast.error(error.message);
+      stopLoading();
     }
   };
+
+
+  useEffect(()=>{
+    stopLoading()
+  },[])
   return (
     <div className="w-full flex items-center justify-center h-screen bg-cneter bg-cover scrollbar scrollbar-none bg-login-pattern">
       <Navbar />
