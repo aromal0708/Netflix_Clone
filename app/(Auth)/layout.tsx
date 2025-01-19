@@ -22,6 +22,7 @@ export default function AuthLayout({
         <Provider>
           <LoadingProvider>
             <main>
+              {children}
               <Toaster
                 position="top-center"
                 toastOptions={{ duration: 1500 }}

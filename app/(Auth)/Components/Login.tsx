@@ -5,14 +5,17 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Navbar from "./Navbar";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const Login = () => {
+  const { loading, startLoading, stopLoading } = useLoading();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    startLoading();
     try {
       if (!email || !password) {
         toast.error("All Feilds Required");
@@ -36,7 +39,7 @@ const Login = () => {
   };
   return (
     <div className="w-full flex items-center justify-center h-screen bg-cneter bg-cover scrollbar scrollbar-none bg-login-pattern">
-      <Navbar/>
+      <Navbar />
       <div className="w-[450px] h-[500px] flex rounded-lg bg-black bg-opacity-50 items-center  justify-center relative">
         <form
           onSubmit={handleSubmit}

@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Navbar from "./Navbar";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -53,6 +54,7 @@ const Register = () => {
 
   return (
     <div className="w-full flex items-center justify-center h-screen bg-center bg-cover scrollbar scrollbar-none bg-login-pattern">
+      <Navbar />
       <div className="w-[450px] h-[550px] flex rounded-lg bg-black bg-opacity-50 items-center  justify-center relative">
         <form
           onSubmit={handleSubmit}

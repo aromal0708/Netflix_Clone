@@ -25,7 +25,7 @@ const Posters = ({ genre, url }: movieUrlsType) => {
   return (
     <div className="flex flex-col justify-start flex-wrap m-3">
       <h1 className="text-white text-lg font-normal  line-clamp-1">{genre}</h1>
-      <div className="w-full flex flex-row overflow-x-auto overflow-y-hidden scrollbar-hide ml-2 mt-2 bg-transparent">
+      <div className="w-full flex flex-row overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth ml-2 mt-2 bg-transparent">
         {movie?.map((item: any) => (
           <Poster key={item.id} path={item.poster_path} />
         ))}
