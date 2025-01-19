@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Navbar from "./Components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Provider from "../Providers";
+import { LoadingProvider } from "@/contexts/LoadingContext";
 
 export const metadata = {
   title: "Authentication",
@@ -18,13 +19,16 @@ export default function AuthLayout({
   return (
     <html lang="en">
       <body className="scrollbar-hide">
-        <header>
-          <Navbar />
-        </header>
-        <main>
-          <Provider>{children}</Provider>
-          <Toaster position="top-center" toastOptions={{ duration: 1500 }} />
-        </main>
+        <Provider>
+          <LoadingProvider>
+            <main>
+              <Toaster
+                position="top-center"
+                toastOptions={{ duration: 1500 }}
+              />
+            </main>
+          </LoadingProvider>
+        </Provider>
       </body>
     </html>
   );

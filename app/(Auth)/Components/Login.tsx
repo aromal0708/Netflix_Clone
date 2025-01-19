@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Navbar from "./Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ const Login = () => {
   };
   return (
     <div className="w-full flex items-center justify-center h-screen bg-cneter bg-cover scrollbar scrollbar-none bg-login-pattern">
+      <Navbar/>
       <div className="w-[450px] h-[500px] flex rounded-lg bg-black bg-opacity-50 items-center  justify-center relative">
         <form
           onSubmit={handleSubmit}
