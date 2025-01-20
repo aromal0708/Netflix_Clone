@@ -16,9 +16,11 @@ const Posters = ({ genre, url }: movieUrlsType) => {
         }
         setMovie(response.data.results);
       } catch (error: unknown) {
-        error instanceof Error
-          ? console.log(error.message)
-          : console.log("An unexpected error occuered:Posters.tsx");
+        if (error instanceof Error) {
+          console.log(error.message);
+        } else {
+          console.log("An unexpected error occurrer in Posters.tsx");
+        }
       }
     };
     fetchMovies();

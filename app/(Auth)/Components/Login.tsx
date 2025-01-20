@@ -47,7 +47,7 @@ const Login = () => {
 
   useEffect(() => {
     stopLoading();
-  },[]);
+  },[startLoading]);
   return (
     <div className="w-full flex items-center justify-center h-screen bg-cneter bg-cover scrollbar scrollbar-none bg-login-pattern">
       <Navbar />

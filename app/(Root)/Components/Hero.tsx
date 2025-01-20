@@ -1,6 +1,6 @@
 "use client";
 import { trending } from "@/utils/urls";
-import { MovieProps } from "@/types"; 
+import { MovieProps } from "@/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
@@ -34,9 +34,11 @@ const Hero = () => {
         setMovie(response.data.results);
         stopLoading();
       } catch (error: unknown) {
-        error instanceof Error
-          ? console.error(error.message)
-          : console.error("Unexpected error in Hero section");
+        if (error instanceof Error) {
+          console.log(error.message);
+        } else {
+          console.log("An unexpected error occurrer in Hero.tsx");
+        }
       }
     };
     fetchData();
