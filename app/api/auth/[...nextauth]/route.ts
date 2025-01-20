@@ -1,6 +1,7 @@
 import { connectToDB } from "@/lib/db";
 import User from "@/models/user.model";
 import NextAuth, { AuthOptions } from "next-auth";
+import { CredentialsProps } from "@/types";
 import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -9,10 +10,13 @@ const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-      async authorize(credentials: any) {
-        const { email, password } = credentials;
+      async authorize(credentials) {
+        if (!credentials) {
+          throw new Error("Credentials are required");
+        }
+        const { email, password } = credentials as CredentialsProps;
         if (!email || !password) {
-          throw new Error("All Feilds Required");
+          throw new Error("All Fields Required");
         }
         try {
           await connectToDB();

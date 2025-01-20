@@ -1,5 +1,5 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, SignInResponse } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 import { useLoading } from "@/contexts/LoadingContext";
 
 const Login = () => {
-  const { loading, startLoading, stopLoading } = useLoading();
+  const { startLoading, stopLoading } = useLoading();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -22,7 +22,7 @@ const Login = () => {
         stopLoading();
         return;
       }
-      const res: any = await signIn("credentials", {
+      const res: SignInResponse | undefined = await signIn("credentials", {
         email,
         password,
         redirect: false,
@@ -30,21 +30,24 @@ const Login = () => {
       if (res?.ok) {
         toast.success("Log In Successful");
       } else {
-        toast.error(res.error);
+        toast.error(res?.error || "An unknown Error Occurred  F");
         stopLoading();
         return;
       }
       router.push("/");
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An inexpected error occurred");
+      }
       stopLoading();
     }
   };
 
-
-  useEffect(()=>{
-    stopLoading()
-  },[])
+  useEffect(() => {
+    stopLoading();
+  },[]);
   return (
     <div className="w-full flex items-center justify-center h-screen bg-cneter bg-cover scrollbar scrollbar-none bg-login-pattern">
       <Navbar />
@@ -83,7 +86,7 @@ const Login = () => {
             </Link>
           </span>
           <span className="mt-5 text-white font-normal text-xs">
-            Use the Email :"test@gmail.com" and Password:"test@12"
+            Use the Email : <b>test@gmail.com</b> and Password:<b>test@12</b>
           </span>
         </form>
       </div>

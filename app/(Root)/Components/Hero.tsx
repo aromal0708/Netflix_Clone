@@ -1,15 +1,17 @@
 "use client";
 import { trending } from "@/utils/urls";
+import { MovieProps } from "@/types"; 
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useLoading } from "@/contexts/LoadingContext";
+import Image from "next/image";
 
 //component
 const Hero = () => {
-  const [movie, setMovie] = useState<any[]>([]);
+  const [movie, setMovie] = useState<MovieProps[]>([]);
   const { stopLoading } = useLoading();
   const settings = {
     // dots: true,
@@ -31,20 +33,22 @@ const Hero = () => {
         const response = await axios.get(`${url}${trending}`);
         setMovie(response.data.results);
         stopLoading();
-      } catch (error: any) {
-        console.error(error.message);
+      } catch (error: unknown) {
+        error instanceof Error
+          ? console.error(error.message)
+          : console.error("Unexpected error in Hero section");
       }
     };
     fetchData();
-  }, []);
+  }, [stopLoading]);
   return (
     <Slider {...settings} className="w-full overflow-hidden scrollbar-none">
-      {movie.map((item: any) => (
+      {movie.map((item: MovieProps) => (
         <div
           key={item.id}
           className="relative h-[300px] w-full flex flex-col justify-center items-start text-white p-1 lg:h-[430px]"
         >
-          <img
+          <Image
             src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
             alt="image"
             className="absolute top-0 left-0 w-full h-full object-fit object-center z-0"

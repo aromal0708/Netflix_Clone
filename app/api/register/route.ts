@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { connectToDB } from "@/lib/db";
 import User from "@/models/user.model";
-export const POST = async (req: any) => {
+export const POST = async (req: Request) => {
   try {
     const { name, email, password } = await req.json();
     //No Credentials
@@ -35,7 +35,9 @@ export const POST = async (req: any) => {
       { message: "User Registered Successfully" },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    if(error instanceof Error)
     return NextResponse.json({ message: error.message }, { status: 500 });
+  else NextResponse.json({ message:"Unexpected Error occurred While Registering"}, { status: 500 });
   }
 };

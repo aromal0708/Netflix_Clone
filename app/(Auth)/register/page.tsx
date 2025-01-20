@@ -3,7 +3,7 @@ import { Register } from "../Components";
 import { useLoading } from "@/contexts/LoadingContext";
 import Loader from "@/app/components/Loading";
 
-const page = () => {
+const Page = () => {
   const { loading } = useLoading();
   if (loading) {
     return <Loader />;
@@ -11,4 +11,4 @@ const page = () => {
   return <Register />;
 };
 
-export default page;
+export default Page;

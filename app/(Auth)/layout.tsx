@@ -3,7 +3,6 @@ import "../globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import Navbar from "./Components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Provider from "../Providers";
 import { LoadingProvider } from "@/contexts/LoadingContext";

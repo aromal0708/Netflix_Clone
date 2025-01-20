@@ -3,8 +3,6 @@ import { movieUrls } from "@/utils/urls";
 import { Hero } from "./Components";
 import Posters from "./Components/Posters";
 import { movieUrlsType } from "@/types";
-import { useEffect } from "react";
-import { useLoading } from "@/contexts/LoadingContext";
 
 export default function Home() {
   return (

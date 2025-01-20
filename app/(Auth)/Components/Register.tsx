@@ -53,10 +53,10 @@ const Register = () => {
         stopLoading();
         throw new Error(data.message);
       }
-    } catch (error: any) {
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) toast.error(error.message);
+      else toast.error("An unexpected error occurred");
       stopLoading();
-      toast.error(error.message);
     }
   };
 

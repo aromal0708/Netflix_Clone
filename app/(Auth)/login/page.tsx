@@ -3,7 +3,7 @@ import { useLoading } from "@/contexts/LoadingContext";
 import { Login } from "../Components";
 import Loader from "@/app/components/Loading";
 
-const page = () => {
+const Page = () => {
   const { loading } = useLoading();
   if (loading) {
     return <Loader />;
@@ -11,4 +11,4 @@ const page = () => {
   return <Login />;
 };
 
-export default page;
+export default Page;
