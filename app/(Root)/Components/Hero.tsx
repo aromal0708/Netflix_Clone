@@ -7,7 +7,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useLoading } from "@/contexts/LoadingContext";
-import Image from "next/image";
 
 //component
 const Hero = () => {
@@ -50,7 +49,7 @@ const Hero = () => {
           key={item.id}
           className="relative h-[300px] w-full flex flex-col justify-center items-start text-white p-1 lg:h-[430px]"
         >
-          <Image
+          <img
             src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
             alt="image"
             className="absolute top-0 left-0 w-full h-full object-fit object-center z-0"
